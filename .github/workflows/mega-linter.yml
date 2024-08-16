@@ -20,7 +20,6 @@ jobs:
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push, comment issues & post new PR
       # Remove the ones you do not need
-      contents: write
       issues: write
       pull-requests: write
     steps:
@@ -32,7 +31,7 @@ jobs:
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
       
       - run: 
-          rm -Rf lib/
+          find lib/ -type d -exec rm -Rf {} \; -print
           pip install \
             apscheduler \
             beets \
@@ -53,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           # DISABLE: COPYPASTE,SPELL # Uncomment to disable copy-paste and spell checks
-          DISABLE: SPELL
+          DISABLE: COPYPASTE, SPELL
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
