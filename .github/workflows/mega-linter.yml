@@ -31,7 +31,14 @@ jobs:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
       
-      - run: rm -Rf lib/
+      - run: 
+          rm -Rf lib/
+          pip install \
+            apscheduler \
+            beets \
+            beetsplug \
+            requests \
+            types-requests
 
       # MegaLinter
       - name: MegaLinter
