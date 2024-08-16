@@ -30,6 +30,8 @@ jobs:
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
+      
+      - run: rm -Rf lib/
 
       # MegaLinter
       - name: MegaLinter
@@ -45,8 +47,6 @@ jobs:
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           # DISABLE: COPYPASTE,SPELL # Uncomment to disable copy-paste and spell checks
           DISABLE: SPELL
-          EXCLUDED_DIRECTORIES: "lib"
-
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
